@@ -1,0 +1,13 @@
+{
+  "role": "backend developer",
+  "questions": [
+    "Tell me about yourself.",
+    "What is REST API?",
+    "How does authentication work?",
+    "What is the difference between SQL and NoSQL?",
+    "Explain JWT.",
+    "How do you handle errors in backend?",
+    "What is middleware in Flask?",
+    "Explain database indexing."
+  ]
+}

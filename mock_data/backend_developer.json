@@ -1,0 +1,65 @@
+{
+  "role": "backend developer",
+  "questions": [
+    {
+      "question": "What is REST API?",
+      "options": ["Database", "Client-server communication", "Frontend framework", "Programming language"],
+      "answer": "Client-server communication",
+      "explanation": "REST API enables communication via HTTP."
+    },
+    {
+      "question": "Which HTTP method fetches data?",
+      "options": ["POST", "GET", "PUT", "DELETE"],
+      "answer": "GET",
+      "explanation": "GET is used to retrieve data."
+    },
+    {
+      "question": "Which is a relational database?",
+      "options": ["MongoDB", "PostgreSQL", "Redis", "Firebase"],
+      "answer": "PostgreSQL",
+      "explanation": "PostgreSQL is SQL-based."
+    },
+    {
+      "question": "What is JWT used for?",
+      "options": ["Styling", "Authentication", "Storage", "Logging"],
+      "answer": "Authentication",
+      "explanation": "JWT is used for secure authentication."
+    },
+    {
+      "question": "Which language is backend?",
+      "options": ["HTML", "CSS", "Python", "Figma"],
+      "answer": "Python",
+      "explanation": "Python is widely used in backend."
+    },
+    {
+      "question": "Which framework is backend?",
+      "options": ["React", "Angular", "Flask", "Bootstrap"],
+      "answer": "Flask",
+      "explanation": "Flask is a backend framework."
+    },
+    {
+      "question": "Which is NoSQL?",
+      "options": ["MySQL", "PostgreSQL", "MongoDB", "Oracle"],
+      "answer": "MongoDB",
+      "explanation": "MongoDB is NoSQL."
+    },
+    {
+      "question": "What is ORM?",
+      "options": ["Object mapping", "API", "Database", "Frontend"],
+      "answer": "Object mapping",
+      "explanation": "ORM maps objects to DB tables."
+    },
+    {
+      "question": "Which tool for API testing?",
+      "options": ["Postman", "Photoshop", "Figma", "Excel"],
+      "answer": "Postman",
+      "explanation": "Postman is used for API testing."
+    },
+    {
+      "question": "Which status code is success?",
+      "options": ["404", "500", "200", "301"],
+      "answer": "200",
+      "explanation": "200 means OK."
+    }
+  ]
+}

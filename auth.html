@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AlignMetric AI — Sign In / Register</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@400,0" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a0f;--surface:#111118;--surface2:#18181f;--surface3:#22222c;
+  --primary:#7c6fff;--primary2:#a78bfa;--accent:#2dd4bf;
+  --text:#f0eeff;--muted:#9990bb;--border:rgba(124,111,255,0.15);
+  --font-display:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;
+}
+html,body{
+  min-height:100vh;background:var(--bg);color:var(--text);
+  font-family:var(--font-body);overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* ── BACKGROUND ORBS ── */
+.bg-orb{position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0}
+.orb1{width:600px;height:600px;background:radial-gradient(circle,rgba(124,111,255,.18),transparent 70%);top:-150px;left:-100px}
+.orb2{width:400px;height:400px;background:radial-gradient(circle,rgba(45,212,191,.1),transparent 70%);bottom:-100px;right:-80px}
+
+/* ── LAYOUT ── */
+.auth-page{
+  position:relative;z-index:1;
+  width:100%;min-height:100vh;
+  display:grid;grid-template-columns:1fr 1fr;
+}
+@media(max-width:800px){.auth-page{grid-template-columns:1fr}.auth-brand{display:none!important}}
+
+/* ── BRAND PANEL ── */
+.auth-brand{
+  display:flex;flex-direction:column;justify-content:center;padding:4rem;
+  border-right:1px solid var(--border);background:rgba(255,255,255,.015);
+}
+.brand-logo{
+  font-family:var(--font-display);font-size:1.5rem;font-weight:800;
+  background:linear-gradient(120deg,var(--primary),var(--accent));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:3rem;display:inline-block;
+}
+.brand-headline{
+  font-family:var(--font-display);font-size:2.4rem;font-weight:800;
+  line-height:1.1;letter-spacing:-.04em;margin-bottom:1.25rem;
+}
+.brand-headline .grad{
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.brand-sub{font-size:.95rem;color:var(--muted);line-height:1.7;max-width:340px;margin-bottom:3rem}
+.brand-stats{display:flex;flex-direction:column;gap:1.25rem}
+.bstat{display:flex;align-items:center;gap:1rem}
+.bstat-icon{
+  width:40px;height:40px;border-radius:10px;flex-shrink:0;
+  background:rgba(124,111,255,.12);border:1px solid rgba(124,111,255,.2);
+  display:flex;align-items:center;justify-content:center;
+}
+.bstat-icon .material-symbols-outlined{font-size:18px;color:var(--primary2)}
+.bstat-text{font-size:.85rem;color:var(--muted);line-height:1.5}
+.bstat-text strong{color:var(--text);display:block;font-size:.9rem;margin-bottom:.1rem}
+
+/* ── AUTH PANEL ── */
+.auth-panel{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:3rem 2rem;
+}
+.auth-card{width:100%;max-width:400px}
+
+.back-link{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-size:.82rem;color:var(--muted);margin-bottom:2.5rem;
+  cursor:pointer;transition:color .2s;text-decoration:none;
+}
+.back-link:hover{color:var(--text)}
+.back-link .material-symbols-outlined{font-size:16px}
+
+.auth-logo{
+  font-family:var(--font-display);font-size:1.4rem;font-weight:800;
+  background:linear-gradient(120deg,var(--primary),var(--accent));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:.5rem;
+}
+.auth-title{font-family:var(--font-display);font-size:1.6rem;font-weight:800;letter-spacing:-.03em;margin-bottom:.4rem}
+.auth-sub{font-size:.88rem;color:var(--muted);margin-bottom:2rem;line-height:1.6}
+
+/* ── TABS ── */
+.auth-tabs{display:flex;background:var(--surface2);border-radius:10px;padding:4px;margin-bottom:2rem;border:1px solid var(--border)}
+.auth-tab{
+  flex:1;padding:.6rem;border:none;background:transparent;
+  font-family:var(--font-display);font-size:.85rem;font-weight:700;
+  color:var(--muted);cursor:pointer;border-radius:7px;transition:all .2s;
+}
+.auth-tab.active{background:var(--surface3);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.3)}
+
+/* ── FORM ── */
+.form-field{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
+.form-field label{font-size:.75rem;font-weight:600;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.form-field input{
+  background:var(--surface);border:1px solid var(--border);border-radius:8px;
+  padding:.8rem 1rem;color:var(--text);font-family:var(--font-body);font-size:.9rem;
+  outline:none;transition:border-color .2s;
+}
+.form-field input:focus{border-color:var(--primary)}
+.form-field input::placeholder{color:rgba(153,144,187,.35)}
+
+.auth-btn{
+  width:100%;padding:.9rem;border:none;border-radius:10px;
+  font-family:var(--font-display);font-size:.95rem;font-weight:700;color:#fff;
+  background:linear-gradient(135deg,var(--primary),#9333ea);cursor:pointer;
+  margin-top:.75rem;transition:all .2s;letter-spacing:-.01em;
+}
+.auth-btn:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(124,111,255,.4)}
+.auth-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+
+.auth-error{
+  background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);
+  color:#fca5a5;font-size:.8rem;padding:.65rem 1rem;border-radius:8px;
+  text-align:center;display:none;margin-bottom:.75rem;
+}
+.auth-error.show{display:block}
+
+.auth-divider{
+  display:flex;align-items:center;gap:.75rem;
+  margin:1.5rem 0;font-size:.75rem;color:var(--muted);
+}
+.auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+
+.auth-footer{text-align:center;font-size:.8rem;color:var(--muted);margin-top:1.25rem}
+.auth-footer button{
+  background:none;border:none;color:var(--primary2);cursor:pointer;
+  font-size:.8rem;font-family:var(--font-body);text-decoration:underline;text-underline-offset:3px;
+}
+
+/* ── PAGE TRANSITION ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.auth-card{animation:fadeUp .35s ease}
+</style>
+</head>
+<body>
+
+<div class="bg-orb orb1"></div>
+<div class="bg-orb orb2"></div>
+
+<div class="auth-page">
+
+  <!-- ── BRAND PANEL ── -->
+  <div class="auth-brand">
+    <div class="brand-logo">AlignMetric AI</div>
+    <h2 class="brand-headline">Your resume,<br><span class="grad">AI-optimised.</span></h2>
+    <p class="brand-sub">Semantic AI that shows exactly what's missing and how to fix it — so you land more interviews, faster.</p>
+    <div class="brand-stats">
+      <div class="bstat">
+        <div class="bstat-icon"><span class="material-symbols-outlined">analytics</span></div>
+        <div class="bstat-text"><strong>6-factor ATS score</strong>Keyword match, semantic depth, skills, experience & more</div>
+      </div>
+      <div class="bstat">
+        <div class="bstat-icon"><span class="material-symbols-outlined">auto_awesome</span></div>
+        <div class="bstat-text"><strong>AI Resume Coach</strong>Gemini AI rewrites weak sections, ranked by impact</div>
+      </div>
+      <div class="bstat">
+        <div class="bstat-icon"><span class="material-symbols-outlined">quiz</span></div>
+        <div class="bstat-text"><strong>Mock interviews</strong>AI-graded practice for every target role</div>
+      </div>
+      <div class="bstat">
+        <div class="bstat-icon"><span class="material-symbols-outlined">lock</span></div>
+        <div class="bstat-text"><strong>Free forever</strong>No credit card. No catch.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── AUTH PANEL ── -->
+  <div class="auth-panel">
+    <div class="auth-card">
+
+      <a class="back-link" href="/">
+        <span class="material-symbols-outlined">arrow_back</span>
+        Back to home
+      </a>
+
+      <div class="auth-logo">AlignMetric AI</div>
+      <h1 class="auth-title" id="authTitle">Create account</h1>
+      <p class="auth-sub" id="authSub">Start matching smarter — it's free</p>
+
+      <!-- TABS -->
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tabRegister" onclick="switchTab('register')">Register</button>
+        <button class="auth-tab" id="tabLogin" onclick="switchTab('login')">Sign in</button>
+      </div>
+
+      <!-- ERROR -->
+      <div class="auth-error" id="authError"></div>
+
+      <!-- FIELDS -->
+      <div class="form-field" id="nameField">
+        <label>Full name</label>
+        <input type="text" id="inputName" placeholder="Jane Smith" autocomplete="name"/>
+      </div>
+      <div class="form-field">
+        <label>Email</label>
+        <input type="email" id="inputEmail" placeholder="jane@example.com" autocomplete="email"/>
+      </div>
+      <div class="form-field">
+        <label>Password</label>
+        <input type="password" id="inputPassword" placeholder="••••••••" autocomplete="current-password"/>
+      </div>
+
+      <button class="auth-btn" id="authBtn" onclick="submitAuth()">Get started free</button>
+
+      <div class="auth-footer">
+        <span id="switchText">Already have an account?</span>
+        <button onclick="switchTab(currentMode === 'register' ? 'login' : 'register')" id="switchBtn">Sign in</button>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+var currentMode = 'register';
+
+/* Read ?mode= from URL on load */
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var m = params.get('mode');
+  if (m === 'login') switchTab('login');
+})();
+
+function switchTab(mode) {
+  currentMode = mode;
+  var isReg = mode === 'register';
+
+  document.getElementById('tabRegister').classList.toggle('active', isReg);
+  document.getElementById('tabLogin').classList.toggle('active', !isReg);
+
+  document.getElementById('authTitle').textContent  = isReg ? 'Create account' : 'Welcome back';
+  document.getElementById('authSub').textContent    = isReg ? "Start matching smarter — it's free" : 'Sign in to continue';
+  document.getElementById('nameField').style.display = isReg ? 'flex' : 'none';
+  document.getElementById('authBtn').textContent    = isReg ? 'Get started free' : 'Sign in';
+  document.getElementById('switchText').textContent = isReg ? 'Already have an account?' : "Don't have an account?";
+  document.getElementById('switchBtn').textContent  = isReg ? 'Sign in' : 'Register';
+  document.getElementById('inputPassword').autocomplete = isReg ? 'new-password' : 'current-password';
+  document.getElementById('authError').classList.remove('show');
+
+  // Update URL without reload
+  var url = new URL(window.location.href);
+  url.searchParams.set('mode', mode);
+  window.history.replaceState({}, '', url);
+}
+
+async function submitAuth() {
+  var email = document.getElementById('inputEmail').value.trim();
+  var pass  = document.getElementById('inputPassword').value;
+  var name  = document.getElementById('inputName').value.trim();
+  var errEl = document.getElementById('authError');
+
+  if (!email || !pass) {
+    errEl.textContent = 'Please fill in all fields.';
+    errEl.classList.add('show');
+    return;
+  }
+  if (currentMode === 'register' && !name) {
+    errEl.textContent = 'Please enter your full name.';
+    errEl.classList.add('show');
+    return;
+  }
+
+  var btn = document.getElementById('authBtn');
+  btn.textContent = 'Please wait…';
+  btn.disabled = true;
+  errEl.classList.remove('show');
+
+  try {
+    var ep   = currentMode === 'register' ? '/register' : '/login';
+    var body = currentMode === 'register'
+      ? { email, password: pass, name }
+      : { email, password: pass };
+
+    var res  = await fetch(ep, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    var data = await res.json();
+
+    if (!res.ok) {
+      errEl.textContent = data.error || 'Something went wrong.';
+      errEl.classList.add('show');
+      return;
+    }
+    // ✅ Save user info so the app can use it, then redirect
+    localStorage.setItem('user_email', email);
+    localStorage.setItem('user_name', data.name || name || '');
+    window.location.href = '/app';
+  } catch(e) {
+    errEl.textContent = 'Could not connect to server. Is Flask running?';
+    errEl.classList.add('show');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = currentMode === 'register' ? 'Get started free' : 'Sign in';
+  }
+}
+
+/* Keyboard */
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') submitAuth();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+Flask
+Flask-CORS
+Flask-SQLAlchemy
+dotenv
+PyPDF2
+python-docx
+numpy
+google-generativeai
+sentence-transformers
