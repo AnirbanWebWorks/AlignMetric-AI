@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, jsonify, send_file
 from routes.mock_test import mock_test_bp
 from routes.mock_interview import mock_interview_bp
@@ -10,7 +11,6 @@ import docx
 import re
 import numpy as np
 import json
-import os
 import re
 
 
