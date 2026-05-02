@@ -7,3 +7,4 @@ python-docx
 numpy
 google-generativeai
 sentence-transformers
+gunicorn
